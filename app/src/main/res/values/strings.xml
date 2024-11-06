@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Interrapidismo</string>
+
+    <!-- Login -->
+    <string name="title_error_sign_in">Error inicio de sesion</string>
+    <string name="title_version_app">Version App</string>
+    <string name="message_lower_version">La versión que estas usando es más baja a la permitida</string>
+    <string name="message_upper_version">La versión que estas usando es más alta a la permitida</string>
+    <string name="label_sing_in">Inicio de sesion</string>
+    <string name="label_user">Usuario</string>
+    <string name="label_password">Contraseña</string>
+    <string name="text_sing_in">Inicia sesion</string>
+
+    <!-- Login -->
+    <string name="text_user">Usuario: %s</string>
+    <string name="text_identification">Identificación: %s</string>
+    <string name="text_name">Nombre: %s</string>
+    <string name="text_tables">Tablas</string>
+    <string name="text_localities">Localidades</string>
+
+    <!-- Localities -->
+    <string name="text_completed_name">Nombre Completo: %s</string>
+    <string name="text_abbreviation_city">Abreviación Ciudad: %s</string>
+
+    <!-- Tables -->
+    <string name="text_table_name">Nombre Tabla: %s</string>
+    <string name="text_number_fields">Número Campos: %s</string>
+</resources>
