@@ -8,5 +8,7 @@ interface DatabaseDataSource {
 
     suspend fun insertSchema(response: ArrayList<TableSchema>)
 
-    suspend fun getAllSchema(): List<TableSchemaEntity>
+    suspend fun getAllSchema(): List<String>
+
+    suspend fun getDataByTable(table: String): List<Map<String, Any?>>
 }

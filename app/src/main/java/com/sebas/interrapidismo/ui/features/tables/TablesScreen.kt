@@ -1,5 +1,6 @@
 package com.sebas.interrapidismo.ui.features.tables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +31,7 @@ import com.sebas.interrapidismo.R
 import com.sebas.interrapidismo.data.database.entity.TableSchemaEntity
 import com.sebas.interrapidismo.model.state.TablesState
 import com.sebas.interrapidismo.ui.components.LoaderComponent
+import com.sebas.interrapidismo.ui.navigation.TableInformation
 
 @Composable
 fun TablesScreen(
@@ -41,8 +44,13 @@ fun TablesScreen(
         uiState.isLoading -> LoaderComponent()
     }
 
-    Tables(uiState){
-        navController.popBackStack()
+    Tables(
+        uiState,
+        navigateBackStack = {
+            navController.popBackStack()
+        }
+    ){
+        navController.navigate(TableInformation(it))
     }
 }
 
@@ -50,7 +58,8 @@ fun TablesScreen(
 @Composable
 fun Tables(
     uiState: TablesState,
-    navigateBackStack: () -> Unit
+    navigateBackStack: () -> Unit,
+    navigateToTableData: (String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -72,26 +81,47 @@ fun Tables(
                 .padding(it)
                 .fillMaxSize(),
             uiState.listSchema
-        )
-    }
-}
-
-@Composable
-fun TablesContent(modifier: Modifier, listSchema: List<TableSchemaEntity>) {
-    LazyColumn(modifier.padding(horizontal = 24.dp)) {
-        items(listSchema) { item ->
-            ListItem(item)
+        ) {
+            navigateToTableData(it)
         }
     }
 }
 
 @Composable
-fun ListItem(item: TableSchemaEntity) {
+fun TablesContent(
+    modifier: Modifier,
+    listSchema: List<String>,
+    navigateToTableData: (String) -> Unit
+) {
+    Column(modifier = modifier
+        .fillMaxSize()
+        .padding(horizontal = 24.dp)
+    ) {
+        Text(text = "Selecciona una tabla para ver los detalles", style = MaterialTheme.typography.titleMedium)
+        Spacer(modifier = Modifier.height(10.dp))
+        LazyColumn {
+            items(listSchema) { item ->
+                ListItem(item) {
+                    navigateToTableData(item)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ListItem(
+    item: String,
+    onItemSelected: (String) -> Unit
+) {
     Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp)) {
-        Text(stringResource(id = R.string.text_table_name,item.tableName))
-        Text(stringResource(id = R.string.text_number_fields,item.fieldsNumber))
+        .clickable {
+            onItemSelected(item)
+        }
+        .padding(15.dp)
+    ) {
+        Text(stringResource(id = R.string.text_table_name,item), style = MaterialTheme.typography.bodyMedium)
         Spacer(modifier = Modifier.height(8.dp))
         Divider(
             thickness = 1.dp,

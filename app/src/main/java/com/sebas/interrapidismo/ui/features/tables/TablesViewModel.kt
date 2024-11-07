@@ -23,4 +23,10 @@ class TablesViewModel @Inject constructor(
           _uiState.value = _uiState.value.copy(listSchema = databaseRepository.getAllSchema())
         }
     }
+
+    fun fetchDataByTable(tableName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _uiState.value = _uiState.value.copy(listDataTable = databaseRepository.getDataByTable(tableName))
+        }
+    }
 }

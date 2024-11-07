@@ -6,5 +6,7 @@ import com.sebas.interrapidismo.network.model.response.TableSchema
 interface DatabaseRepository {
     suspend fun fetchSchemaDatabase()
 
-    suspend fun getAllSchema(): List<TableSchemaEntity>
+    suspend fun getAllSchema(): List<String>
+
+    suspend fun getDataByTable(tableName: String): List<Map<String, Any?>>
 }

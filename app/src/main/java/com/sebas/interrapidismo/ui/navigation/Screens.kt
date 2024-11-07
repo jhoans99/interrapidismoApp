@@ -13,3 +13,6 @@ object Tables
 
 @Serializable
 object Localities
+
+@Serializable
+data class TableInformation(val nameTable: String)

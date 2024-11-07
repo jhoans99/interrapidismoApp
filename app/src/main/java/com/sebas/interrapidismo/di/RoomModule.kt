@@ -38,5 +38,9 @@ object RoomModule {
         database: AppDatabase
     ) = database.tableSchemaDao()
 
-
+    @Singleton
+    @Provides
+    fun provideDynamicQueryDao(
+        database: AppDatabase
+    ) = database.DynamicQueryDao()
 }

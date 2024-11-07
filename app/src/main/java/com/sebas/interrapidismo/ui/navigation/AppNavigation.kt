@@ -4,9 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.sebas.interrapidismo.ui.features.home.HomeScreen
 import com.sebas.interrapidismo.ui.features.localities.LocalitiesScreen
 import com.sebas.interrapidismo.ui.features.login.LoginScreen
+import com.sebas.interrapidismo.ui.features.tables.TablesInformationScreen
 import com.sebas.interrapidismo.ui.features.tables.TablesScreen
 
 @Composable
@@ -27,6 +29,10 @@ fun AppNavigation() {
         }
         composable<Tables> {
             TablesScreen(navController)
+        }
+        composable<TableInformation> { backStackEntry ->
+            val tableName = backStackEntry.toRoute<TableInformation>()
+            TablesInformationScreen(navController,tableName.nameTable)
         }
     }
 }

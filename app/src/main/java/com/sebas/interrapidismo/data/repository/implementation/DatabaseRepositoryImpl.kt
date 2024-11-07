@@ -1,6 +1,5 @@
 package com.sebas.interrapidismo.data.repository.implementation
 
-import com.sebas.interrapidismo.data.database.entity.TableSchemaEntity
 import com.sebas.interrapidismo.data.datasource.DatabaseDataSource
 import com.sebas.interrapidismo.data.repository.DatabaseRepository
 import javax.inject.Inject
@@ -13,5 +12,8 @@ class DatabaseRepositoryImpl @Inject constructor(
         databaseDataSource.insertSchema(response)
     }
 
-    override suspend fun getAllSchema(): List<TableSchemaEntity> = databaseDataSource.getAllSchema()
+    override suspend fun getAllSchema(): List<String> = databaseDataSource.getAllSchema()
+    override suspend fun getDataByTable(tableName: String): List<Map<String, Any?>> {
+        return databaseDataSource.getDataByTable(tableName)
+    }
 }

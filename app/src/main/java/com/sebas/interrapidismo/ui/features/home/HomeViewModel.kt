@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sebas.interrapidismo.commons.Result
 import com.sebas.interrapidismo.data.repository.DatabaseRepository
 import com.sebas.interrapidismo.domain.usecases.FetchInfoUserUseCase
+import com.sebas.interrapidismo.domain.usecases.FetchSchemaDataBaseUseCase
 import com.sebas.interrapidismo.model.state.HomeState
 import com.sebas.interrapidismo.model.state.toUserInformation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val databaseRepository: DatabaseRepository,
-    private val fetchInfoUserUseCase: FetchInfoUserUseCase
+    private val fetchSchemaDataBaseUseCase: FetchSchemaDataBaseUseCase,
+    private val fetchInfoUserUseCase: FetchInfoUserUseCase,
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeState())
@@ -25,7 +26,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            databaseRepository.fetchSchemaDatabase()
+            fetchSchemaDataBaseUseCase.fetchSchemaDataBase()
             fetchInfoUserUseCase().collect {
                 when(it) {
                     is Result.Error -> {

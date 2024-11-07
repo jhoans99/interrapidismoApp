@@ -5,13 +5,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CardTravel
+import androidx.compose.material.icons.filled.PermIdentity
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PersonPin
+import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -91,12 +97,31 @@ fun HomeContent(
             contentDescription = null,
             modifier = Modifier.size(40.dp)
         )
-        stringResource(id = R.string.label_user)
-        Text(stringResource(id = R.string.text_user, uiState.userInformation.user))
+        Spacer(modifier = Modifier.height(20.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Icon(imageVector = Icons.Filled.Person, contentDescription = null)
+            Text(stringResource(id = R.string.text_user, uiState.userInformation.user),style = MaterialTheme.typography.bodyMedium)
+        }
+
         Spacer(modifier = Modifier.height( 20.dp))
-        Text(stringResource(id = R.string.text_identification,uiState.userInformation.identification))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Icon(imageVector = Icons.Filled.CardTravel, contentDescription = null)
+            Text(stringResource(id = R.string.text_identification,uiState.userInformation.identification),style = MaterialTheme.typography.bodyMedium)
+        }
         Spacer(modifier = Modifier.height( 20.dp))
-        Text(stringResource(id = R.string.text_name,uiState.userInformation.names))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Icon(imageVector = Icons.Filled.VerifiedUser, contentDescription = null)
+            Text(stringResource(id = R.string.text_name,uiState.userInformation.names), style = MaterialTheme.typography.bodyMedium)
+        }
         Spacer(modifier = Modifier.height( 20.dp))
         Row {
             Button(onClick = {
